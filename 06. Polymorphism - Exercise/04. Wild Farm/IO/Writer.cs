@@ -4,9 +4,9 @@
     using Contracts;
     public class Writer : IWriter
     {
-        void IWriter.Write(string message)
+        public void Write(string message)
             => Console.Write(message);
-        public void WriterLine(string message)
+        public void WriteLine(string message)
             => Console.WriteLine(message);
 
     }

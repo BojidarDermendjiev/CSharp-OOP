@@ -3,6 +3,6 @@
     public interface IWriter
     {
         public void Write(string message);
-        public void WriterLine(string message);
+        public void WriteLine(string message);
     }
 }

@@ -1,30 +1,35 @@
 ﻿namespace _04._Wild_Farm.Core
 {
-    using Contracts;
-    using _04._Wild_Farm.Models;
     using System.Collections.Generic;
-    using System;
+    using IO;
+    using Models;
+    using Contracts;
+    using IO.Contracts;
 
     public class Engine : IEngine
     {
         private IController controller;
+        private IReader reader;
+        private IWriter writer;
         public Engine()
         {
             this.controller = new Controller();
+            this.reader = new Reader();
+            this.writer = new Writer();
         }
         public void Run()
         {
             List<Animal> animals = new List<Animal>();
             string input;
-            while ((input = Console.ReadLine()) != "End")
+            while ((input = reader.ReadLine()) != "End")
             {
                 Animal animal = controller.GetAnimal(input);
-                Console.WriteLine(animal.Sound());
-                Food food = controller.GetFood(Console.ReadLine());
+                writer.WriteLine(animal.Sound());
+                Food food = controller.GetFood(reader.ReadLine());
                 animal.Eat(food);
                 animals.Add(animal);
             }
-            animals.ForEach(animal => Console.WriteLine(animal));
+            animals.ForEach(animal => writer.WriteLine(animal.ToString()));
         }
     }
 }

@@ -1,23 +1,15 @@
 ﻿namespace _04._Wild_Farm.Core
 {
+    using System.Linq;
     using Models;
     using Contracts;
-    using _04._Wild_Farm.IO.Contracts;
-    using _04._Wild_Farm.IO;
-    using _04._Wild_Farm.Models.Foods;
-    using _04._Wild_Farm.Models.Animals.Bird;
-    using _04._Wild_Farm.Models.Animals.Mammal.Tiger;
-    using _04._Wild_Farm.Models.Animals.Mammal;
+    using Models.Foods;
+    using Models.Animals.Bird;
+    using Models.Animals.Mammal;
+    using Models.Animals.Mammal.Tiger;
 
     public class Controller : IController
     {
-        private IReader reader;
-        private IWriter writer;
-        public Controller()
-        {
-            this.reader = new Reader();
-            this.writer = new Writer();
-        }
         public Animal GetAnimal(string userInput)
         {
             string[] info = userInput.Split();
@@ -41,13 +33,12 @@
                 default:
                     return null;
             }
-           
         }
         public Food GetFood(string userInput)
         {
             string[] info = userInput.Split();
-            string type = info[0];
-            int quantity = int.Parse(info[1]);
+            string type = info.First();
+            int quantity = int.Parse(info.Last());
             switch (type)
             {
                 case "Fruit":
